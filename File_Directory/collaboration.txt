@@ -1,0 +1,35 @@
+[This is a template for your project collaboration document.  Please briefly answer the following questions in whatever format you'd lik. Try to stay within 500 words unless there is an issue/bug requiring additional explanation.]
+
+(1) Who did you collaborate with or recieve help/insight from during this project, and how did they help?
+I collaborated with Phoebe on working on commenting of the methods and how to think about ciphers (when you encrypt something you have to do the reverse to decrypt it).
+
+(2) What went well for you in this project?
+I feel like I understand the file directory better and how it works.
+
+(3) What was challenging for you in this project?
+The mirror part tricked me up quite a bit.
+
+(4) Did you consult any online sources in developing the code you are submitting?  Please list any sources and how/why you used them.  Note that any code or bug-fixes directly used in your code should be well-commented *by you* to indicate your understanding.
+
+I consulted a few online sources such as:
+https://pubs.opengroup.org/onlinepubs/007904875/functions/open.html: to figure out what open() does
+
+https://www.ibm.com/docs/ru/zos/2.4.0?topic=lf-pread-read-from-file-socket-without-file-pointer-change: to figure out how pread() works
+
+https://math.asu.edu/sites/default/files/affine.pdf: how affine cihers work
+
+https://teaching.idallen.com/cst8207/13w/notes/450_file_system.html#:~:text=Like%20all%20inodes%2C%20directory%20inodes,of%20names%20and%20inode%20numbers on how directory inodes are formatted
+
+
+TESTING:
+So for my affine cipher I did some reading and saw that for an encryption key it needed to be prime of 256 so I picked 19. I also saw that for the decryption you needed to be able to multiply the encryption key (19) by a NUMBER and then mod it by 256 and receive 1, that is how I found 19*27 mod 256 = 1 and selected 27 as my decryption key. Because of this complexity I opted to not let the user select the encryption or decryption multiplier because it would end up causing the user more pain in the end if they didn't want to do the math. I tested various texts and saw all of them encrypted and decrypted properly.
+
+
+SHORT ANSWERS:
+1. I believe regular files and directories will have similar formats because they both need to maintain access permissions, file history, path; however, the file pointers for a directory should maintain a list of file names and inode while a file would have pointers to blocks of data from the file.
+
+2. It would mean the file's contents are the same and changing something in the file would change both file's content. It only really makes sense if you wanted to be able to access a file from multiple directories but it would get confusing and dangerous if you thought you made a copy but didn't and changed the original and couldn't go back to the original.
+
+3. First you access the root -> home -> lpentecost -> cutestdog -> mipha -> mipha.jpg. So 6!
+
+4. You cant identify it uniquely because you could have multiple mipha.jpg stored across different directories. You could use IDDFS, because if you don't have the directories you just need to shoot down through directories to get to files and see if any of them are the desired file. I chose IDDFS because if for some reason yu have 1000000 directories you dont really want to shoot down all of them only to be unsuccessful; however, I have noticed within my own file system that the first few accesses of my path are almost always directories so BFS would be mostly useless for awhile. Anyways, even IDDFS won't be efficient because it will still take forever.
